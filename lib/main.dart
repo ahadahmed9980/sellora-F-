@@ -51,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               'You have pushed the button this many times:',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
-            const SizedBox(height: AppSpacing.sm),
+            const SizedBox(height: AppTheme.spacingSM),
             Text('$_counter', style: Theme.of(context).textTheme.displayLarge),
           ],
         ),
