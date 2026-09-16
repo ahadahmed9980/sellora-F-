@@ -95,6 +95,10 @@ class AppColors {
   /// White text on primary (#FFFFFF) - Text on primary gradient buttons, active bottom nav capsule labels
   static const Color textOnPrimary = Color(0xFFFFFFFF);
 
+  /// Ambient glow & halo accents
+  static const Color ambientHaloRing = Color(0x146D5DF6);
+  static const Color ambientOrb = Color(0x1F8B5CF6);
+
   // ---------------------------------------------------------------------------
   // Gradients
   // ---------------------------------------------------------------------------
@@ -104,4 +108,40 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
   );
+
+  /// Light lavender ambient scaffold gradient (as seen on Splash & Hero screens)
+  /// (#EDE9FE -> #F5F4FF -> #F8F9FF)
+  static const LinearGradient scaffoldGradient = LinearGradient(
+    colors: [
+      Color(0xFFEDE9FE),
+      Color(0xFFF5F4FF),
+      Color(0xFFF8F9FF),
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    stops: [0.0, 0.45, 1.0],
+  );
+
+  /// Soft vertical ambient gradient
+  static const LinearGradient scaffoldSoftGradient = LinearGradient(
+    colors: [
+      Color(0xFFF3F0FE),
+      Color(0xFFF8F9FF),
+    ],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
+  /// Radial ambient glow gradient for hero / splash center
+  static const RadialGradient scaffoldRadialGradient = RadialGradient(
+    center: Alignment(0.0, -0.32),
+    radius: 0.9,
+    colors: [
+      Color(0xFFE8E3FD),
+      Color(0xFFF3F1FE),
+      Color(0xFFF8F9FF),
+    ],
+    stops: [0.0, 0.5, 1.0],
+  );
 }
+

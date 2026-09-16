@@ -8,6 +8,7 @@ import 'app_spacing.dart';
 import 'app_text_styles.dart';
 
 export 'app_colors.dart';
+export 'app_decorations.dart';
 export 'app_dimensions.dart';
 export 'app_radius.dart';
 export 'app_shadows.dart';

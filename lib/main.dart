@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'core/theme/app_theme.dart';
+
+import './pages/splashscreen.dart';
+import './utils/theme/app_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'Sellora POS',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const MyHomePage(title: 'Sellora POS'),
+      home: const Splashscreen(),
     );
   }
 }
@@ -40,9 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -52,10 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: AppSpacing.sm),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.displayLarge,
-            ),
+            Text('$_counter', style: Theme.of(context).textTheme.displayLarge),
           ],
         ),
       ),
