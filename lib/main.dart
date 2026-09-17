@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sellora/routes/app_routes.dart';
 
-import './pages/splashscreen.dart';
 import './utils/theme/app_theme.dart';
 
 void main() {
@@ -12,11 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Sellora POS',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
-      home: const Splashscreen(),
+      routerConfig: appRouter,
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../app_colors.dart';
+import '../app_dimensions.dart';
+import '../app_typography.dart';
 
 /// Centralized Material 3 Chip Theme for Sellora POS.
 class AppChipTheme {
@@ -11,17 +12,18 @@ class AppChipTheme {
     backgroundColor: AppColors.containerLow,
     selectedColor: AppColors.primaryLight,
     disabledColor: AppColors.containerLow,
-    labelStyle: GoogleFonts.sora(
-      fontSize: 13,
+    labelStyle: AppTypography.bodyMedium.copyWith(
       fontWeight: FontWeight.w500,
       color: AppColors.textPrimary,
     ),
-    secondaryLabelStyle: GoogleFonts.sora(
-      fontSize: 13,
+    secondaryLabelStyle: AppTypography.bodyMedium.copyWith(
       fontWeight: FontWeight.w600,
       color: AppColors.primary,
     ),
-    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+    padding: const EdgeInsets.symmetric(
+      horizontal: AppDimensions.spacingMD,
+      vertical: AppDimensions.spacingSM,
+    ),
     shape: const StadiumBorder(),
     side: BorderSide.none,
     elevation: 0,

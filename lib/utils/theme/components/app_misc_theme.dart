@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../app_colors.dart';
 import '../app_dimensions.dart';
+import '../app_typography.dart';
 
 /// Centralized Material 3 Theme configurations for Radio, Dividers, Progress Indicators, SnackBars, Popups, and Tooltips.
 class AppMiscTheme {
@@ -46,19 +46,13 @@ class AppMiscTheme {
         width: AppDimensions.borderWidth,
       ),
     ),
-    textStyle: GoogleFonts.sora(
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
-      color: AppColors.textPrimary,
-    ),
+    textStyle: AppTypography.bodyLarge,
   );
 
   /// SnackBar Theme
   static SnackBarThemeData get snackBarTheme => SnackBarThemeData(
     backgroundColor: AppColors.textPrimary,
-    contentTextStyle: GoogleFonts.sora(
-      fontSize: 14,
-      fontWeight: FontWeight.w400,
+    contentTextStyle: AppTypography.bodyLarge.copyWith(
       color: AppColors.textOnPrimary,
     ),
     shape: RoundedRectangleBorder(
@@ -73,23 +67,23 @@ class AppMiscTheme {
       color: AppColors.textPrimary,
       borderRadius: BorderRadius.circular(AppDimensions.radiusXS),
     ),
-    textStyle: GoogleFonts.sora(
-      fontSize: 12,
-      fontWeight: FontWeight.w400,
+    textStyle: AppTypography.bodySmall.copyWith(
       color: AppColors.textOnPrimary,
     ),
-    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+    padding: const EdgeInsets.symmetric(
+      horizontal: AppDimensions.spacingMD,
+      vertical: AppDimensions.spacingXS + 2,
+    ),
   );
 
   /// Badge Theme
   static BadgeThemeData get badgeTheme => BadgeThemeData(
     backgroundColor: AppColors.primary,
     textColor: AppColors.textOnPrimary,
-    textStyle: GoogleFonts.sora(
-      fontSize: 11,
-      fontWeight: FontWeight.w700,
-      letterSpacing: 0.4,
+    textStyle: AppTypography.badge,
+    padding: const EdgeInsets.symmetric(
+      horizontal: AppDimensions.spacingXS + 2,
+      vertical: 2,
     ),
-    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
   );
 }

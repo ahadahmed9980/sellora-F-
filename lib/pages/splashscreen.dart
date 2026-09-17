@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
+import 'package:go_router/go_router.dart';
 
-class Splashscreen extends StatelessWidget {
+class Splashscreen extends StatefulWidget {
   const Splashscreen({super.key});
+
+  @override
+  State<Splashscreen> createState() => _SplashscreenState();
+}
+
+class _SplashscreenState extends State<Splashscreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(seconds: 5), () {
+      if (!mounted) return;
+
+      context.goNamed('signup');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +51,6 @@ class Splashscreen extends StatelessWidget {
             const SizedBox(height: AppTheme.spacingLG),
             //point of sale
             pointOfSale(),
-      
 
             const SizedBox(height: AppTheme.spacingXL),
             //title
@@ -43,7 +58,7 @@ class Splashscreen extends StatelessWidget {
             const SizedBox(height: AppTheme.spacingSM),
             Text(
               "Smart Shop, Smart Sales ",
-              style: AppTypography.h2.copyWith(color: Colors.grey),
+              style: AppTypography.h2.copyWith(color: AppColors.grey),
             ),
             Spacer(),
             LoadingAnimationWidget.waveDots(color: AppColors.primary, size: 35),

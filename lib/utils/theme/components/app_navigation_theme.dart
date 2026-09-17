@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../app_colors.dart';
 import '../app_dimensions.dart';
+import '../app_typography.dart';
 
 /// Centralized Material 3 Navigation Themes (NavigationBar, AppBar, TabBar, Drawer) for Sellora POS.
 class AppNavigationTheme {
@@ -19,19 +19,12 @@ class AppNavigationTheme {
         indicatorShape: const StadiumBorder(),
         labelTextStyle: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
-            return GoogleFonts.sora(
-              fontSize: 11,
+            return AppTypography.navLabel.copyWith(
               fontWeight: FontWeight.w600,
-              height: 1.20,
               color: AppColors.primary,
             );
           }
-          return GoogleFonts.sora(
-            fontSize: 11,
-            fontWeight: FontWeight.w500,
-            height: 1.20,
-            color: AppColors.textMuted,
-          );
+          return AppTypography.navLabel;
         }),
         iconTheme: WidgetStateProperty.resolveWith((states) {
           if (states.contains(WidgetState.selected)) {
@@ -56,12 +49,7 @@ class AppNavigationTheme {
     surfaceTintColor: Colors.transparent,
     toolbarHeight: AppDimensions.appBarHeight,
     centerTitle: false,
-    titleTextStyle: GoogleFonts.sora(
-      fontSize: 18,
-      fontWeight: FontWeight.w700,
-      color: AppColors.textPrimary,
-      letterSpacing: -0.3,
-    ),
+    titleTextStyle: AppTypography.h1.copyWith(fontSize: 18),
     iconTheme: const IconThemeData(
       color: AppColors.textPrimary,
       size: AppDimensions.iconRegular,
@@ -78,10 +66,10 @@ class AppNavigationTheme {
     indicatorSize: TabBarIndicatorSize.tab,
     labelColor: AppColors.primary,
     unselectedLabelColor: AppColors.textMuted,
-    labelStyle: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.w600),
-    unselectedLabelStyle: GoogleFonts.sora(
-      fontSize: 14,
+    labelStyle: AppTypography.bodyLarge.copyWith(fontWeight: FontWeight.w600),
+    unselectedLabelStyle: AppTypography.bodyLarge.copyWith(
       fontWeight: FontWeight.w500,
+      color: AppColors.textMuted,
     ),
     dividerColor: AppColors.border,
   );
@@ -123,13 +111,11 @@ class AppNavigationTheme {
           color: AppColors.textMuted,
           size: AppDimensions.iconNav,
         ),
-        selectedLabelTextStyle: GoogleFonts.sora(
-          fontSize: 12,
+        selectedLabelTextStyle: AppTypography.bodySmall.copyWith(
           fontWeight: FontWeight.w600,
           color: AppColors.primary,
         ),
-        unselectedLabelTextStyle: GoogleFonts.sora(
-          fontSize: 12,
+        unselectedLabelTextStyle: AppTypography.bodySmall.copyWith(
           fontWeight: FontWeight.w500,
           color: AppColors.textMuted,
         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../app_colors.dart';
 import '../app_dimensions.dart';
+import '../app_typography.dart';
 
 /// Centralized Material 3 Button Themes for Sellora POS.
 class AppButtonsTheme {
@@ -12,21 +12,20 @@ class AppButtonsTheme {
   static ElevatedButtonThemeData get elevatedButtonTheme =>
       ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
+          
           backgroundColor: AppColors.primary,
           foregroundColor: AppColors.textOnPrimary,
           disabledBackgroundColor: AppColors.containerLow,
           disabledForegroundColor: AppColors.textDisabled,
           elevation: 0,
-          shadowColor: Colors.transparent,
+          shadowColor: Colors.black,
           minimumSize: const Size.fromHeight(AppDimensions.primaryButtonHeight),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-          shape: const StadiumBorder(),
-          textStyle: GoogleFonts.sora(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-            height: 1.20,
-            letterSpacing: 0.1,
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.spacingXXL,
+            vertical: 14,
           ),
+          shape: const StadiumBorder(),
+          textStyle: AppTypography.button,
         ),
       );
 
@@ -39,14 +38,12 @@ class AppButtonsTheme {
       disabledForegroundColor: AppColors.textDisabled,
       elevation: 0,
       minimumSize: const Size.fromHeight(AppDimensions.primaryButtonHeight),
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-      shape: const StadiumBorder(),
-      textStyle: GoogleFonts.sora(
-        fontSize: 15,
-        fontWeight: FontWeight.w600,
-        height: 1.20,
-        letterSpacing: 0.1,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppDimensions.spacingXXL,
+        vertical: 14,
       ),
+      shape: const StadiumBorder(),
+      textStyle: AppTypography.button,
     ),
   );
 
@@ -66,9 +63,14 @@ class AppButtonsTheme {
             color: AppColors.border,
             width: AppDimensions.borderWidth,
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppDimensions.spacingXL,
+            vertical: AppDimensions.spacingMD,
+          ),
           shape: const StadiumBorder(),
-          textStyle: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.w600),
+          textStyle: AppTypography.bodyLarge.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
         ),
       );
 
@@ -77,9 +79,14 @@ class AppButtonsTheme {
     style: TextButton.styleFrom(
       foregroundColor: AppColors.primary,
       disabledForegroundColor: AppColors.textDisabled,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppDimensions.spacingLG,
+        vertical: AppDimensions.spacingSM,
+      ),
       shape: const StadiumBorder(),
-      textStyle: GoogleFonts.sora(fontSize: 14, fontWeight: FontWeight.w600),
+      textStyle: AppTypography.bodyLarge.copyWith(
+        fontWeight: FontWeight.w600,
+      ),
     ),
   );
 

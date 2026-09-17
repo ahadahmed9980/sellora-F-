@@ -13,8 +13,7 @@ class AppColors {
   static const Color primaryDark = Color(0xFF4F46E5);
   static const Color primaryLight = Color(0xFFEFF4FF);
   static const Color primaryContainer = Color(0xFFEDE9FE);
-    static const Color grey = Color(0xFF787586);
-
+  static const Color grey = Color(0xFF787586);
 
   // Canvas & Surfaces
   static const Color surfaceBackground = Color(0xFFF8F9FF);
@@ -81,17 +80,17 @@ class AppColors {
   );
 
   /// Splash screen vertical ambient gradient
- static const LinearGradient splashScreenGradient = LinearGradient(
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-  colors: [
-    Color(0xFFF5F3FF),
-    Color(0xFFF1EEFF),
-    Color(0xFFECE7FF),
-    Color(0xFFE9E2FF),
-    Color(0xFFE2D8FF),
-    Color(0xFFD6C6FF),
-  ],
-  stops: [0.0, 0.20, 0.40, 0.58, 0.80, 1.0],
-);
+  static const LinearGradient splashScreenGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Color(0xFFF5F3FF),
+      Color(0xFFF1EEFF),
+      Color(0xFFECE7FF),
+      Color(0xFFE9E2FF),
+      Color(0xFFE2D8FF),
+      Color(0xFFD6C6FF),
+    ],
+    stops: [0.0, 0.20, 0.40, 0.58, 0.80, 1.0],
+  );
 }

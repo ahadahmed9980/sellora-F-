@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../app_colors.dart';
+import '../app_dimensions.dart';
 
 /// Centralized Material 3 Checkbox Theme for Sellora POS.
 class AppCheckboxTheme {
@@ -14,7 +15,12 @@ class AppCheckboxTheme {
       return AppColors.cardSurface;
     }),
     checkColor: WidgetStateProperty.all(AppColors.textOnPrimary),
-    side: const BorderSide(color: AppColors.border, width: 1.5),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+    side: const BorderSide(
+      color: AppColors.border,
+      width: AppDimensions.borderWidthFocused,
+    ),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(AppDimensions.radiusXS),
+    ),
   );
 }
