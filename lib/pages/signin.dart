@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
-import 'package:sellora/controller/signup.controller.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:sellora/controller/signin.controller.dart';
+import 'package:sellora/utils/theme/app_colors.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
+import 'package:sellora/utils/theme/app_typography.dart';
 import 'package:sellora/widgets/formfield.dart';
 import 'package:sellora/widgets/socialbutton.dart';
 
-class Signup extends StatelessWidget {
-  const Signup({super.key});
+class Signin extends StatelessWidget {
+  final Signincontroller controller = Get.find<Signincontroller>();
+  Signin({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Signupcontroller controller = Get.find<Signupcontroller>();
-
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -36,7 +37,7 @@ class Signup extends StatelessWidget {
 
                 // 3D Shop Illustration
                 Image.asset(
-                  "assets/images/signup1.png",
+                  "assets/images/signin.png",
                   height: 110,
                   fit: BoxFit.contain,
                 ),
@@ -44,7 +45,7 @@ class Signup extends StatelessWidget {
 
                 // Title & Subtitle
                 Text(
-                  "Create your account",
+                  "Welcome back",
                   style: AppTypography.displayMedium.copyWith(
                     fontSize: 26,
                     fontWeight: FontWeight.w700,
@@ -53,7 +54,7 @@ class Signup extends StatelessWidget {
                 ),
                 const SizedBox(height: AppTheme.spacingXS),
                 Text(
-                  "Start managing your shop in minutes",
+                  "Sign in to continue to your shop",
                   style: AppTypography.bodyMedium.copyWith(
                     color: AppColors.grey,
                   ),
@@ -109,7 +110,7 @@ class Signup extends StatelessWidget {
           ),
         ),
 
-        // POS Badge
+        // terminal Badge
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
@@ -117,7 +118,7 @@ class Signup extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppTheme.radiusPill),
           ),
           child: Text(
-            "POS",
+            "Terminal Active",
             style: AppTypography.badge.copyWith(
               color: AppColors.primary,
               fontWeight: FontWeight.w800,
@@ -130,7 +131,7 @@ class Signup extends StatelessWidget {
   }
 
   /// Main White Card Container with Form Fields, Terms Checkbox, Button, and Social Logins
-  Widget buildMainCard(Signupcontroller controller) {
+  Widget buildMainCard(Signincontroller controller) {
     return Container(
       width: double.infinity,
       padding: AppTheme.cardPadding,
@@ -146,13 +147,6 @@ class Signup extends StatelessWidget {
       child: Column(
         children: [
           // Full Name
-          DynamicTextFormField(
-            controller: controller.nameController,
-            prefixIcon: Icons.person_outlined,
-            labelText: "Full Name",
-            hintText: "e.g. Maya Lin",
-          ),
-          const SizedBox(height: AppTheme.spacingMD),
 
           // Email Address
           DynamicTextFormField(
@@ -162,7 +156,7 @@ class Signup extends StatelessWidget {
             hintText: "mayaluna@boutique.com",
             keyboardType: TextInputType.emailAddress,
           ),
-          const SizedBox(height: AppTheme.spacingMD),
+          // const SizedBox(height: AppTheme.spacingMD),
 
           // Password
           DynamicTextFormField(
@@ -174,26 +168,15 @@ class Signup extends StatelessWidget {
           ),
           const SizedBox(height: AppTheme.spacingMD),
 
-          // Confirm Password
-          DynamicTextFormField(
-            controller: controller.confirmPasswordController,
-            prefixIcon: Icons.lock_outline,
-            labelText: "Confirm Password",
-            hintText: "******",
-            isPassword: true,
-          ),
-          const SizedBox(height: AppTheme.spacingMD),
-
-          // Terms of Service & Privacy Policy Checkbox
-          buildTermsCheckbox(controller),
-          const SizedBox(height: AppTheme.spacingLG),
+  
+  
 
           // Create Account Button
           ElevatedButton(
             onPressed: () {
               // Sign up action
             },
-            child: const Text('Create Account'),
+            child: Text('Sign In'),
           ),
           const SizedBox(height: AppTheme.spacingXXL),
 
@@ -217,75 +200,6 @@ class Signup extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  /// Terms of Service & Privacy Policy Checkbox Row using GetX RxBool
-  Widget buildTermsCheckbox(Signupcontroller controller) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: 22,
-          width: 22,
-          child: Obx(
-            () => Checkbox(
-              value: controller.agreeToTerms.value,
-              activeColor: AppColors.primary,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(AppDimensions.radiusXS),
-              ),
-              side: const BorderSide(
-                color: AppColors.border,
-                width: AppDimensions.borderWidthFocused,
-              ),
-              onChanged: (val) {
-                controller.toggleTerms(val);
-              },
-            ),
-          ),
-        ),
-        const SizedBox(width: AppTheme.spacingSM),
-        Expanded(
-          child: GestureDetector(
-            onTap: () {
-              controller.toggleTerms();
-            },
-            child: Text.rich(
-              TextSpan(
-                text: "I agree to the ",
-                style: AppTypography.bodySmall.copyWith(
-                  color: AppColors.textSecondary,
-                ),
-                children: [
-                  TextSpan(
-                    text: "Terms of Service",
-                    style: AppTypography.bodySmall.copyWith(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w600,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                  TextSpan(
-                    text: " & ",
-                    style: AppTypography.bodySmall.copyWith(
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
-                  TextSpan(
-                    text: "Privacy Policy",
-                    style: AppTypography.bodySmall.copyWith(
-                      color: AppColors.primary,
-                      fontWeight: FontWeight.w600,
-                      decoration: TextDecoration.underline,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -324,18 +238,17 @@ class Signup extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Already have an account? ",
+          "New to Sellora? ",
           style: AppTypography.bodyMedium.copyWith(
             color: AppColors.textSecondary,
           ),
         ),
         GestureDetector(
           onTap: () {
-            context.goNamed('signin');
-            debugPrint("clicked sigin ");
+            // Navigate to Sign in screen
           },
           child: Text(
-            "Sign in",
+            "Create account",
             style: AppTypography.bodyMedium.copyWith(
               fontWeight: FontWeight.w700,
               color: AppColors.primary,
