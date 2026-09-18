@@ -15,7 +15,7 @@ class _SplashscreenState extends State<Splashscreen> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 3), () {
       if (!mounted) return;
 
       context.goNamed('signup');

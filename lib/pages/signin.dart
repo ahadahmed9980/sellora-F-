@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sellora/controller/signin.controller.dart';
 import 'package:sellora/utils/theme/app_colors.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
@@ -175,6 +176,7 @@ class Signin extends StatelessWidget {
           ElevatedButton(
             onPressed: () {
               // Sign up action
+            
             },
             child: Text('Sign In'),
           ),
@@ -246,6 +248,7 @@ class Signin extends StatelessWidget {
         GestureDetector(
           onTap: () {
             // Navigate to Sign in screen
+            context.goNamed('signup');
           },
           child: Text(
             "Create account",
