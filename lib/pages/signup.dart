@@ -23,10 +23,7 @@ class Signup extends StatelessWidget {
         child: SafeArea(
           child: SingleChildScrollView(
             physics: const ClampingScrollPhysics(),
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppTheme.spacingLG,
-              vertical: AppTheme.spacingMD,
-            ),
+            padding: AppTheme.screenPadding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

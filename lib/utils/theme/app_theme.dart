@@ -89,8 +89,10 @@ class AppTheme {
   // DIMENSION ALIASES (Backward Compatibility with AppDimensions)
   // ============================================================
   static const double primaryButtonHeight = AppDimensions.primaryButtonHeight;
-  static const double secondaryButtonHeight = AppDimensions.secondaryButtonHeight;
-  static const double secondaryButtonHeightCompact = AppDimensions.secondaryButtonHeightCompact;
+  static const double secondaryButtonHeight =
+      AppDimensions.secondaryButtonHeight;
+  static const double secondaryButtonHeightCompact =
+      AppDimensions.secondaryButtonHeightCompact;
   static const double inputHeight = AppDimensions.inputHeight;
   static const double searchFieldHeight = AppDimensions.searchFieldHeight;
   static const double appBarHeight = AppDimensions.appBarHeight;

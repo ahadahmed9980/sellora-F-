@@ -45,9 +45,32 @@ class AppColors {
   static const Color ambientHaloRing = Color(0x146D5DF6);
   static const Color ambientOrb = Color(0x1F8B5CF6);
 
+  // Dashboard Metric Cards Palette
+  static const Color cardGreenBg = Color(0xFFF0FDF4);
+  static const Color cardGreenBorder = Color(0xFFDCFCE7);
+  static const Color cardGreenIconBg = Color(0xFFDCFCE7);
+  static const Color cardGreenIcon = Color(0xFF10B981);
+
+  static const Color cardBlueBg = Color(0xFFEFF6FF);
+  static const Color cardBlueBorder = Color(0xFFDBEAFE);
+  static const Color cardBlueIconBg = Color(0xFFDBEAFE);
+  static const Color cardBlueIcon = Color(0xFF3B82F6);
+
+  static const Color cardRedBg = Color(0xFFFFF1F2);
+  static const Color cardRedBorder = Color(0xFFFEE2E2);
+  static const Color cardRedIconBg = Color(0xFFFEE2E2);
+  static const Color cardRedIcon = Color(0xFFF43F5E);
+
   // ============================================================
   // GRADIENTS
   // ============================================================
+
+  /// Dashboard Sales Hero banner gradient
+  static const LinearGradient salesHeroGradient = LinearGradient(
+    colors: [Color(0xFF4338CA), Color(0xFF5B4DF6), Color(0xFF6D5DF6)],
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+  );
 
   /// Primary button & brand gradient (#6D5DF6 -> #4F46E5)
   static const LinearGradient primaryGradient = LinearGradient(
