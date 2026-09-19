@@ -142,15 +142,6 @@ class Signup extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Full Name
-          DynamicTextFormField(
-            controller: controller.nameController,
-            prefixIcon: Icons.person_outlined,
-            labelText: "Full Name",
-            hintText: "e.g. Maya Lin",
-          ),
-          const SizedBox(height: AppTheme.spacingMD),
-
           // Email Address
           DynamicTextFormField(
             controller: controller.emailController,
@@ -313,7 +304,7 @@ class Signup extends StatelessWidget {
     );
   }
 
-  /// Social Login Outlined Pill Button (Google / Apple)
+
 
   /// Bottom Footer Row (Already have an account? Sign in)
   Widget buildFooter(BuildContext context) {

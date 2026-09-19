@@ -35,32 +35,32 @@ class Homepage extends StatelessWidget {
 
             // 3. Net Profit Card with Trend Sparkline
             _buildNetProfitCard(),
-            Text(
-              "High frequency POS workflows",
-              style: GoogleFonts.sora(
-                fontSize: 13,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFF64748B),
-              ),
-            ),
-            const SizedBox(height: 14),
+            const SizedBox(height: AppTheme.spacingLG),
+            Text("Quick Actions", style: AppTheme.h1),
+            const SizedBox(height: AppTheme.spacingLG),
             // Quick actions row
             Obx(
-              () => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: homeController.quickActions.map((action) {
-                  return quickaction(
-                    title: action.title,
-                    icon: action.icon,
-                    bgColor: action.backgroundColor,
-                    iconColor: action.iconColor,
-                    textColor: action.textColor,
-                    isPrimary: action.isPrimary,
-                    route: action.route,
-                    context: context,
-                  );
-                }).toList(),
+              () => SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: homeController.quickActions.map((action) {
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: quickaction(
+                        title: action.title,
+                        icon: action.icon,
+                        bgColor: action.backgroundColor,
+                        iconColor: action.iconColor,
+                        textColor: action.textColor,
+                        isPrimary: action.isPrimary,
+                        route: action.route,
+                        context: context,
+                      ),
+                    );
+                  }).toList(),
+                ),
               ),
             ),
           ],
@@ -600,11 +600,7 @@ Widget quickaction({
                       ),
                     ],
             ),
-            child: Icon(
-              icon,
-              color: iconColor,
-              size: isPrimary ? 28 : 26,
-            ),
+            child: Icon(icon, color: iconColor, size: isPrimary ? 28 : 26),
           ),
           const SizedBox(height: 8),
           Text(
