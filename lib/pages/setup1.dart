@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sellora/controller/setup1.controller.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
 import 'package:sellora/widgets/build_header.dart';
+import 'package:sellora/widgets/button.dart';
 import 'package:sellora/widgets/formfield.dart';
 
 class Setup1 extends StatelessWidget {
@@ -28,7 +30,7 @@ class Setup1 extends StatelessWidget {
                 const SizedBox(height: AppTheme.spacingMD),
                 topLines(),
                 const SizedBox(height: AppTheme.spacingLG),
-                buildMainCard(controller),
+                buildMainCard(controller, context),
                 const SizedBox(height: AppTheme.spacingXL),
                 buildFooter(),
                 const SizedBox(height: AppTheme.spacingLG),
@@ -70,7 +72,7 @@ class Setup1 extends StatelessWidget {
   }
 
   //white card with form fields
-  Widget buildMainCard(Setup1controller controller) {
+  Widget buildMainCard(Setup1controller controller, BuildContext context) {
     return Container(
       width: double.infinity,
       padding: AppTheme.heroCardPadding,
@@ -134,41 +136,10 @@ class Setup1 extends StatelessWidget {
           const SizedBox(height: AppTheme.spacingXL),
 
           // Continue Button
-          Container(
-            width: double.infinity,
-            height: AppDimensions.primaryButtonHeight,
-            decoration: BoxDecoration(
-              gradient: AppColors.primaryGradient,
-              borderRadius: BorderRadius.circular(AppTheme.radiusPill),
-              boxShadow: AppDimensions.buttonGlow,
-            ),
-            child: ElevatedButton(
-              onPressed: controller.onContinue,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                shape: const StadiumBorder(),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Continue",
-                    style: AppTypography.button.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(width: AppTheme.spacingSM),
-                  const Icon(
-                    Icons.arrow_forward_rounded,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                ],
-              ),
-            ),
-          ),
+          customButton(context, "Continue", () {
+            context.push('/setup2');
+          }),
+
           const SizedBox(height: AppTheme.spacingLG),
 
           // Security Trust Badge
@@ -226,14 +197,15 @@ class Setup1 extends StatelessWidget {
                           )
                         : null,
                   ),
-                  child: pickedFile==null?     const Center(
-                    
-                    child: Icon(
-                      Icons.person_outline_rounded,
-                      size: 42,
-                      color: AppColors.primary,
-                    ),
-                  ):null,
+                  child: pickedFile == null
+                      ? const Center(
+                          child: Icon(
+                            Icons.person_outline_rounded,
+                            size: 42,
+                            color: AppColors.primary,
+                          ),
+                        )
+                      : null,
                 ),
               );
             }),
