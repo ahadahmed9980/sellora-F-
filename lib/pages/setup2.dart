@@ -5,6 +5,7 @@ import 'package:sellora/controller/setup2.controller.dart';
 import 'package:sellora/models/setupCategoryModel.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
 import 'package:sellora/widgets/button.dart';
+import 'package:sellora/widgets/category_selector.dart';
 import 'package:sellora/widgets/formfield.dart';
 
 class Setup2 extends StatelessWidget {
@@ -22,7 +23,7 @@ class Setup2 extends StatelessWidget {
         ),
         child: SafeArea(
           child: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             padding: AppTheme.screenPadding,
             scrollDirection: Axis.vertical,
             child: Column(
@@ -57,7 +58,8 @@ class Setup2 extends StatelessWidget {
                 ),
                 const SizedBox(height: AppTheme.spacingXL),
                 buildMainCard(controller, context),
-
+                const SizedBox(height: AppTheme.spacingXL),
+                buildTrustBadge(),
                 const SizedBox(height: AppTheme.spacingMD),
                 buildFooter(),
                 const SizedBox(height: AppTheme.spacingLG),
@@ -75,7 +77,7 @@ class Setup2 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // Circular Back Button
-        InkWell(
+        GestureDetector(
           onTap: () {
             if (Navigator.of(context).canPop()) {
               Navigator.of(context).pop();
@@ -234,7 +236,7 @@ class Setup2 extends StatelessWidget {
           ),
           const SizedBox(height: AppTheme.spacingMD),
 
-          // 2. Shop Category Section
+          // 2. Shop Category Section (using reusable DynamicCategorySelector)
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -254,7 +256,13 @@ class Setup2 extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppTheme.spacingSM),
-          buildCategoryList(controller),
+          Obx(
+            () => DynamicCategorySelector(
+              categories: controller.setupcategories,
+              selectedIndex: controller.selectedIndex.value,
+              onCategorySelected: controller.updateIndex,
+            ),
+          ),
           const SizedBox(height: AppTheme.spacingLG),
 
           // 3. Store Currency Section
@@ -302,7 +310,6 @@ class Setup2 extends StatelessWidget {
       ),
     );
   }
-
 
   /// Store Currency Selector Card with Popup Menu
   Widget buildCurrencySelector(Setup2controller controller) {
@@ -442,90 +449,62 @@ class Setup2 extends StatelessWidget {
     });
   }
 
- Widget buildCategoryList(Setup2controller controller) {
-  return SizedBox(
-    height: 44,
-    child: Obx(
-      () => ListView.builder(
-        scrollDirection: Axis.horizontal,
-             physics: const ClampingScrollPhysics(),
-        itemCount: controller.setupcategories.length,
-        itemBuilder: (context, index) {
-          final category = controller.setupcategories[index];
-          final isSelected =
-              controller.selectedIndex.value == index;
-
-          return Padding(
-            padding: EdgeInsets.only(
-              right: index == controller.setupcategories.length - 1
-                  ? 0
-                  : AppTheme.spacingSM,
-            ),
-            child: GestureDetector(
-              behavior: HitTestBehavior.opaque,
-              onTap: () => controller.updateIndex(index),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 10,
-                ),
-                decoration: BoxDecoration(
-                  color: isSelected
-                      ? AppColors.primary
-                      : AppColors.cardSurface,
-                  borderRadius: BorderRadius.circular(
-                    AppDimensions.radiusPill,
-                  ),
-                  border: Border.all(
-                    color: isSelected
-                        ? AppColors.primary
-                        : AppColors.border,
-                    width: AppDimensions.borderWidth,
-                  ),
-                  boxShadow: isSelected
-                      ? [
-                          BoxShadow(
-                            color: AppColors.primary.withValues(
-                              alpha: 0.25,
-                            ),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
-                          ),
-                        ]
-                      : null,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      category.icon,
-                      size: 18,
-                      color: isSelected
-                          ? Colors.white
-                          : AppColors.textSecondary,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      category.title,
-                      style: AppTypography.bodyMedium.copyWith(
-                        fontWeight: isSelected
-                            ? FontWeight.w600
-                            : FontWeight.w500,
-                        color: isSelected
-                            ? Colors.white
-                            : AppColors.textPrimary,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        },
+  /// Cloud Sync & Encrypted Data Trust Badge
+  Widget buildTrustBadge() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.cardSurface,
+        borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+        border: Border.all(
+          color: AppColors.border,
+          width: AppDimensions.borderWidth,
+        ),
+        boxShadow: AppTheme.cardShadow,
       ),
-    ),
-  );
-}
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(
+            Icons.cloud_outlined,
+            size: 16,
+            color: AppColors.success,
+          ),
+          const SizedBox(width: 6),
+          Text(
+            "Cloud Sync Ready",
+            style: AppTypography.bodySmall.copyWith(
+              fontWeight: FontWeight.w600,
+              color: AppColors.textPrimary,
+              fontSize: 12,
+            ),
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              "•",
+              style: TextStyle(color: AppColors.textMuted),
+            ),
+          ),
+          const Icon(
+            Icons.lock_outline_rounded,
+            size: 16,
+            color: AppColors.primary,
+          ),
+          const SizedBox(width: 6),
+          Text(
+            "Encrypted Data",
+            style: AppTypography.bodySmall.copyWith(
+              fontWeight: FontWeight.w600,
+              color: AppColors.textPrimary,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   /// Footer Copyright Notice
   Widget buildFooter() {
     return Text(

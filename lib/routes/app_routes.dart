@@ -1,9 +1,11 @@
 import 'package:go_router/go_router.dart';
+import 'package:sellora/binding/addProduct.binding.dart';
 import 'package:sellora/binding/homePage.binding.dart';
 import 'package:sellora/binding/setup1.binding.dart';
 import 'package:sellora/binding/setup2.binding.dart';
 import 'package:sellora/binding/signin.binding.dart';
 import 'package:sellora/binding/signup.binding.dart';
+import 'package:sellora/pages/addProduct.dart';
 import 'package:sellora/pages/homePage.dart';
 import 'package:sellora/pages/setup1.dart';
 import 'package:sellora/pages/setup2.dart';
@@ -63,6 +65,15 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         Homepagebinding().dependencies();
         return Homepage();
+      },
+    ),
+    //add product
+       GoRoute(
+      path: '/add-product',
+      name: 'addProduct',
+      builder: (context, state) {
+        AddProductbinding().dependencies();
+        return Addproduct();
       },
     ),
   ],

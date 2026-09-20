@@ -71,7 +71,7 @@ class Setup2controller extends GetxController {
 
   void updateIndex(int index) {
     selectedIndex.value = index;
-      print("Selected index: $index");
+  
   }
 
   void updateCurrency(CurrencyItem item) {
