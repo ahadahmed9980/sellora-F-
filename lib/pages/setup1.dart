@@ -248,123 +248,67 @@ class Setup1 extends StatelessWidget {
     );
   }
 
-  /// Phone Number field with country code pill and suffix phone icon
+  /// Phone Number field with country code pill and suffix phone icon using DynamicTextFormField
   Widget buildPhoneField(Setup1controller controller) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Phone Number",
-          style: AppTypography.h3.copyWith(
-            fontWeight: FontWeight.w700,
-            color: AppColors.textPrimary,
+    return DynamicTextFormField(
+      controller: controller.phoneController,
+      labelText: "Phone Number",
+      hintText: "+92 300 1234567",
+      keyboardType: TextInputType.phone,
+      suffixIcon: Icons.phone_outlined,
+      prefixWidget: Obx(
+        () => PopupMenuButton<String>(
+          tooltip: "Select Country Code",
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppDimensions.radiusMD),
           ),
-        ),
-        const SizedBox(height: AppTheme.spacingSM),
-        Container(
-          height: AppDimensions.inputHeight,
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            color: AppColors.cardSurface,
-            borderRadius: BorderRadius.circular(AppDimensions.radiusXL),
-            border: Border.all(
-              color: AppColors.border,
-              width: AppDimensions.borderWidth,
-            ),
-          ),
-          child: Row(
-            children: [
-              // Country Code Selector
-              Obx(
-                () => PopupMenuButton<String>(
-                  tooltip: "Select Country Code",
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(AppDimensions.radiusMD),
-                  ),
-                  onSelected: (code) {
-                    controller.updateCountryCode(code);
-                  },
-                  itemBuilder: (context) => controller.countryCodes.map((code) {
-                    return PopupMenuItem<String>(
-                      value: code,
-                      child: Text(
-                        code,
-                        style: AppTypography.bodyMedium.copyWith(
-                          color: AppColors.textPrimary,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: AppColors.containerLow,
-                      borderRadius: BorderRadius.circular(
-                        AppDimensions.radiusPill,
-                      ),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          controller.selectedCountryCode.value,
-                          style: AppTypography.bodyMedium.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.textPrimary,
-                          ),
-                        ),
-                        const SizedBox(width: 4),
-                        const Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          size: 16,
-                          color: AppColors.textSecondary,
-                        ),
-                      ],
-                    ),
-                  ),
+          onSelected: (code) {
+            controller.updateCountryCode(code);
+          },
+          itemBuilder: (context) => controller.countryCodes.map((code) {
+            return PopupMenuItem<String>(
+              value: code,
+              child: Text(
+                code,
+                style: AppTypography.bodyMedium.copyWith(
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(width: 10),
-              // Phone Input Field
-              Expanded(
-                child: TextFormField(
-                  controller: controller.phoneController,
-                  keyboardType: TextInputType.phone,
-                  style: AppTypography.bodyLarge.copyWith(
+            );
+          }).toList(),
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 6,
+            ),
+            decoration: BoxDecoration(
+              color: AppColors.containerLow,
+              borderRadius: BorderRadius.circular(
+                AppDimensions.radiusPill,
+              ),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  controller.selectedCountryCode.value,
+                  style: AppTypography.bodyMedium.copyWith(
+                    fontWeight: FontWeight.w600,
                     color: AppColors.textPrimary,
                   ),
-                  cursorColor: AppColors.primary,
-                  cursorHeight: 18,
-                  decoration: InputDecoration(
-                    hintText: "+92 300 1234567",
-                    hintStyle: AppTypography.bodyMedium.copyWith(
-                      color: AppColors.textMuted,
-                    ),
-                    border: InputBorder.none,
-                    enabledBorder: InputBorder.none,
-                    focusedBorder: InputBorder.none,
-                    contentPadding: EdgeInsets.zero,
-                    isDense: true,
-                  ),
                 ),
-              ),
-              // Suffix Phone Icon
-              const Padding(
-                padding: EdgeInsets.only(right: 6),
-                child: Icon(
-                  Icons.phone_outlined,
-                  size: AppDimensions.iconRegular,
-                  color: AppColors.textMuted,
+                const SizedBox(width: 4),
+                const Icon(
+                  Icons.keyboard_arrow_down_rounded,
+                  size: 16,
+                  color: AppColors.textSecondary,
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ],
+      ),
     );
   }
 
