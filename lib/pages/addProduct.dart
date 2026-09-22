@@ -1133,13 +1133,13 @@ class Addproduct extends StatelessWidget {
             duration: const Duration(seconds: 2),
           );
         },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.primary,
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
-          ),
-        ),
+        // style: ElevatedButton.styleFrom(
+        //   backgroundColor: AppColors.primary,
+        //   elevation: 0,
+        //   shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
+        //   ),
+        // ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
