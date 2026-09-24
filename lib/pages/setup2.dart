@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sellora/controller/setup2.controller.dart';
 import 'package:sellora/models/setupCategoryModel.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
-import 'package:sellora/widgets/button.dart';
+import 'package:sellora/widgets/buttons/button.dart';
 import 'package:sellora/widgets/category_selector.dart';
 import 'package:sellora/widgets/formfield.dart';
 

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sellora/controller/setup1.controller.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
 import 'package:sellora/widgets/build_header.dart';
-import 'package:sellora/widgets/button.dart';
+import 'package:sellora/widgets/buttons/button.dart';
 import 'package:sellora/widgets/formfield.dart';
 
 class Setup1 extends StatelessWidget {

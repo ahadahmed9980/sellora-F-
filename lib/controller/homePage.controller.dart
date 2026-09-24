@@ -50,5 +50,14 @@ class Homepagecontroller extends GetxController {
       isPrimary: false,
       route: '/payments',
     ),
+    const QuickActionModel(
+      title: 'Add Expense',
+      icon: Icons.account_balance_wallet_outlined,
+      backgroundColor: Colors.white,
+      iconColor: Color(0xFF1E293B),
+      textColor: Color(0xFF334155),
+      isPrimary: false,
+      route: '/add-expense',
+    ),
   ].obs;
 }

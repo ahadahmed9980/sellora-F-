@@ -7,7 +7,7 @@ import 'package:sellora/utils/theme/app_colors.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
 import 'package:sellora/utils/theme/app_typography.dart';
 import 'package:sellora/widgets/formfield.dart';
-import 'package:sellora/widgets/socialbutton.dart';
+import 'package:sellora/widgets/buttons/socialbutton.dart';
 
 class Signin extends StatelessWidget {
   final Signincontroller controller = Get.find<Signincontroller>();

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sellora/controller/signup.controller.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
 import 'package:sellora/widgets/formfield.dart';
-import 'package:sellora/widgets/socialbutton.dart';
+import 'package:sellora/widgets/buttons/socialbutton.dart';
 
 class Signup extends StatelessWidget {
   const Signup({super.key});

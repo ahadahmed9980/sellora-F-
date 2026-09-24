@@ -5,6 +5,7 @@ import 'package:sellora/controller/addProduct.controller.dart';
 import 'package:sellora/utils/scanner_screen.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
 import 'package:sellora/widgets/appbar.dart';
+import 'package:sellora/widgets/buttons/bottomNavigation.dart';
 import 'package:sellora/widgets/category_selector.dart';
 import 'package:sellora/widgets/formfield.dart';
 
@@ -53,37 +54,7 @@ class Addproduct extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.only(
-          left: 20,
-          right: 20,
-          top: 12,
-          bottom: MediaQuery.of(context).padding.bottom > 0
-              ? MediaQuery.of(context).padding.bottom + 8
-              : 16,
-        ),
-        decoration: BoxDecoration(
-          color: AppColors.cardSurface,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withValues(alpha: 0.05),
-              blurRadius: 10,
-              offset: const Offset(0, -4),
-            ),
-          ],
-          border: const Border(
-            top: BorderSide(color: AppColors.border, width: 1),
-          ),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            buildSaveButton(context),
-            const SizedBox(height: 6),
-            buildSaveAndAddAnotherButton(context),
-          ],
-        ),
-      ),
+      bottomNavigationBar: customBottomNavigation(context,'Save Product')
     );
   }
 
@@ -475,50 +446,6 @@ class Addproduct extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppTheme.spacingSM),
-          // DynamicTextFormField(
-          //   controller: controller.barcodeController,
-          //   hintText: "8901234567890",
-          //   prefixIcon: Icons.view_week_outlined,
-          //   suffixWidget: Padding(
-          //     padding: const EdgeInsets.only(right: 0),
-          //     child: GestureDetector(
-          //       onTap: () {
-
-          //       },
-          //       child: Container(
-          //         padding: const EdgeInsets.symmetric(
-          //           horizontal: 10,
-          //           vertical: 6,
-          //         ),
-          //         decoration: BoxDecoration(
-          //           color: AppColors.primaryContainer,
-          //           borderRadius: BorderRadius.circular(
-          //             AppDimensions.radiusPill,
-          //           ),
-          //         ),
-          //         child: Row(
-          //           mainAxisSize: MainAxisSize.min,
-          //           children: [
-          //             const Icon(
-          //               Icons.qr_code_scanner_rounded,
-          //               size: 16,
-          //               color: AppColors.primary,
-          //             ),
-          //             const SizedBox(width: 4),
-          //             Text(
-          //               "Scan",
-          //               style: AppTypography.bodySmall.copyWith(
-          //                 fontWeight: FontWeight.w700,
-          //                 color: AppColors.primary,
-          //                 fontSize: 12,
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
           DynamicTextFormField(
             controller: controller.barcodeController,
             hintText: "8901234567890",
@@ -1116,86 +1043,7 @@ class Addproduct extends StatelessWidget {
   }
 
   /// 6. Save Product CTA Button
-  Widget buildSaveButton(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: AppDimensions.primaryButtonHeight,
-      child: ElevatedButton(
-        onPressed: () {
-          Get.snackbar(
-            "Success",
-            "Product saved successfully!",
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: AppColors.primary,
-            colorText: Colors.white,
-            margin: const EdgeInsets.all(16),
-            borderRadius: AppDimensions.radiusLG,
-            duration: const Duration(seconds: 2),
-          );
-        },
-        // style: ElevatedButton.styleFrom(
-        //   backgroundColor: AppColors.primary,
-        //   elevation: 0,
-        //   shape: RoundedRectangleBorder(
-        //     borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
-        //   ),
-        // ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.check_circle_outline_rounded,
-              color: Colors.white,
-              size: 20,
-            ),
-            const SizedBox(width: 8),
-            Text(
-              "Save Product",
-              style: AppTypography.button.copyWith(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  /// Save & Add Another Button
-  Widget buildSaveAndAddAnotherButton(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        controller.productNameController.clear();
-        controller.descriptionController.clear();
-        controller.selectedImage.value = null;
-        controller.generateSKU();
-        Get.snackbar(
-          "Ready",
-          "Form cleared for next product.",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: AppColors.textPrimary,
-          colorText: Colors.white,
-          margin: const EdgeInsets.all(16),
-          borderRadius: AppDimensions.radiusLG,
-          duration: const Duration(seconds: 2),
-        );
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Text(
-          "Save & Add Another",
-          style: AppTypography.bodyMedium.copyWith(
-            fontWeight: FontWeight.w700,
-            color: AppColors.primary,
-          ),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
-  }
-
+ 
   /// Add Category Dialog
   void showAddCategoryDialog(BuildContext context) {
     final TextEditingController newCategoryController = TextEditingController();

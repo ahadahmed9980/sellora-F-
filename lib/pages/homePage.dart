@@ -5,6 +5,7 @@ import 'package:get/state_manager.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sellora/controller/homePage.controller.dart';
+import 'package:sellora/utils/responsive.dart';
 import 'package:sellora/utils/theme/app_colors.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
 
@@ -39,37 +40,40 @@ class Homepage extends StatelessWidget {
             Text("Quick Actions", style: AppTheme.h1),
             const SizedBox(height: AppTheme.spacingLG),
             // Quick actions row
-            Obx(
-              () => SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: homeController.quickActions.map((action) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 16),
-                      child: quickaction(
-                        title: action.title,
-                        icon: action.icon,
-                        bgColor: action.backgroundColor,
-                        iconColor: action.iconColor,
-                        textColor: action.textColor,
-                        isPrimary: action.isPrimary,
-                        route: action.route,
-                        context: context,
-                      ),
-                    );
-                  }).toList(),
-                ),
-              ),
-            ),
-          ],
+       Obx(
+  () => GridView.builder(
+    shrinkWrap: true,
+    physics: const NeverScrollableScrollPhysics(),
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: Responsive.isMobileScreen(context) ? 4 : 5,
+      crossAxisSpacing: 12,
+      mainAxisSpacing: 16,
+      childAspectRatio: 0.8,
+    ),
+    itemCount: homeController.quickActions.length,
+    itemBuilder: (context, index) {
+      final action = homeController.quickActions[index];
+
+      return quickaction(
+        title: action.title,
+        icon: action.icon,
+        bgColor: action.backgroundColor,
+        iconColor: action.iconColor,
+        textColor: action.textColor,
+        isPrimary: action.isPrimary,
+        route: action.route,
+        context: context,
+      );
+    },
+  ),
+)   ],
         ),
       ),
     );
   }
 
-  //  TODAY'S SALES HERO CARD
+
 
   Widget _buildHeroSalesCard() {
     return Container(

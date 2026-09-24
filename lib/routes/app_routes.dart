@@ -1,10 +1,12 @@
 import 'package:go_router/go_router.dart';
+import 'package:sellora/binding/addExpense.binding.dart';
 import 'package:sellora/binding/addProduct.binding.dart';
 import 'package:sellora/binding/homePage.binding.dart';
 import 'package:sellora/binding/setup1.binding.dart';
 import 'package:sellora/binding/setup2.binding.dart';
 import 'package:sellora/binding/signin.binding.dart';
 import 'package:sellora/binding/signup.binding.dart';
+import 'package:sellora/pages/addExpense.dart';
 import 'package:sellora/pages/addProduct.dart';
 import 'package:sellora/pages/homePage.dart';
 import 'package:sellora/pages/setup1.dart';
@@ -49,7 +51,7 @@ final GoRouter appRouter = GoRouter(
         return Setup1();
       },
     ),
-//setup2
+    //setup2
     GoRoute(
       path: '/setup2',
       name: 'setup2',
@@ -68,12 +70,21 @@ final GoRouter appRouter = GoRouter(
       },
     ),
     //add product
-       GoRoute(
+    GoRoute(
       path: '/add-product',
       name: 'addProduct',
       builder: (context, state) {
         AddProductbinding().dependencies();
         return Addproduct();
+      },
+    ),
+    //add expense
+    GoRoute(
+      path: '/add-expense',
+      name: 'addExpense',
+      builder: (context, state) {
+        Addexpensebinding().dependencies();
+        return Addexpense();
       },
     ),
   ],
