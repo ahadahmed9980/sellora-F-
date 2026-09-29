@@ -1,17 +1,18 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sellora/models/addExpenseCategoryModel.dart';
 
-
-
 class Addexpensecontroller extends GetxController {
   // Form Controllers
-  final TextEditingController amountController =
-      TextEditingController(text: "8500");
-  final TextEditingController noteController =
-      TextEditingController(text: "September bill");
+  final TextEditingController amountController = TextEditingController(
+    text: "8500",
+  );
+  final TextEditingController noteController = TextEditingController(
+    text: "September bill",
+  );
 
   // Expense Amount State
   final RxDouble expenseAmount = 8500.0.obs;
@@ -55,8 +56,14 @@ class Addexpensecontroller extends GetxController {
   final List<ExpenseCategoryItem> categories = [
     ExpenseCategoryItem(title: "Rent", icon: Icons.storefront_outlined),
     ExpenseCategoryItem(title: "Electricity", icon: Icons.bolt_rounded),
-    ExpenseCategoryItem(title: "Gas", icon: Icons.local_fire_department_outlined),
-    ExpenseCategoryItem(title: "Transport", icon: Icons.local_shipping_outlined),
+    ExpenseCategoryItem(
+      title: "Gas",
+      icon: Icons.local_fire_department_outlined,
+    ),
+    ExpenseCategoryItem(
+      title: "Transport",
+      icon: Icons.local_shipping_outlined,
+    ),
     ExpenseCategoryItem(title: "Repairs", icon: Icons.build_outlined),
     ExpenseCategoryItem(title: "Salaries", icon: Icons.badge_outlined),
     ExpenseCategoryItem(title: "Supplies", icon: Icons.inventory_2_outlined),
@@ -68,11 +75,21 @@ class Addexpensecontroller extends GetxController {
   }
 
   // Expense Date
-  final Rx<DateTime> selectedDate = DateTime(2026, 9, 14).obs;
+  final Rx<DateTime> selectedDate = DateTime.now().obs;
 
   static const List<String> _months = [
-    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
   ];
 
   String get formattedDate {
@@ -172,7 +189,9 @@ class Addexpensecontroller extends GetxController {
       return;
     }
 
-    final formattedAmount = expenseAmount.value.toStringAsFixed(0).replaceAllMapped(
+    final formattedAmount = expenseAmount.value
+        .toStringAsFixed(0)
+        .replaceAllMapped(
           RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
           (Match m) => '${m[1]},',
         );

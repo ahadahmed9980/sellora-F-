@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sellora/controller/addProduct.controller.dart';
 import 'package:sellora/utils/scanner_screen.dart';
@@ -54,7 +55,7 @@ class Addproduct extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: customBottomNavigation(context,'Save Product')
+      bottomNavigationBar: customBottomNavigation(context, 'Save Product'),
     );
   }
 
@@ -380,7 +381,7 @@ class Addproduct extends StatelessWidget {
                 ),
               ),
               GestureDetector(
-                onTap: () => showAddCategoryDialog(context),
+                onTap: () => context.push('/add-category'),
                 child: Text(
                   "+ New",
                   style: AppTypography.bodySmall.copyWith(
@@ -1036,54 +1037,6 @@ class Addproduct extends StatelessWidget {
               activeTrackColor: AppColors.primary.withValues(alpha: 0.4),
               onChanged: controller.toggleActiveInPOS,
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 6. Save Product CTA Button
- 
-  /// Add Category Dialog
-  void showAddCategoryDialog(BuildContext context) {
-    final TextEditingController newCategoryController = TextEditingController();
-
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppDimensions.radiusXL),
-        ),
-        title: Text(
-          "Add Category",
-          style: AppTypography.h3.copyWith(fontWeight: FontWeight.w700),
-        ),
-        content: TextField(
-          controller: newCategoryController,
-          autofocus: true,
-          decoration: InputDecoration(
-            hintText: "Category name",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(AppDimensions.radiusMD),
-            ),
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(ctx),
-            child: const Text("Cancel"),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              if (newCategoryController.text.trim().isNotEmpty) {
-                controller.addCategory(
-                  newCategoryController.text.trim(),
-                  Icons.category_outlined,
-                );
-                Navigator.pop(ctx);
-              }
-            },
-            child: const Text("Add"),
           ),
         ],
       ),
