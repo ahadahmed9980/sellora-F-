@@ -1,5 +1,4 @@
 import 'package:go_router/go_router.dart';
-import 'package:sellora/binding/addCategory.binding.dart';
 import 'package:sellora/binding/addExpense.binding.dart';
 import 'package:sellora/binding/addProduct.binding.dart';
 import 'package:sellora/binding/homePage.binding.dart';
@@ -7,7 +6,6 @@ import 'package:sellora/binding/setup1.binding.dart';
 import 'package:sellora/binding/setup2.binding.dart';
 import 'package:sellora/binding/signin.binding.dart';
 import 'package:sellora/binding/signup.binding.dart';
-import 'package:sellora/pages/addCategory.dart';
 import 'package:sellora/pages/addExpense.dart';
 import 'package:sellora/pages/addProduct.dart';
 import 'package:sellora/pages/homePage.dart';
@@ -89,14 +87,6 @@ final GoRouter appRouter = GoRouter(
         return Addexpense();
       },
     ),
-       //add category
-    GoRoute(
-      path: '/add-category',
-      name: 'addCategory',
-      builder: (context, state) {
-        Addcategorybinding().dependencies();
-        return Addcategory();
-      },
-    ),
+       
   ],
 );
