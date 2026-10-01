@@ -59,5 +59,14 @@ class Homepagecontroller extends GetxController {
       isPrimary: false,
       route: '/add-expense',
     ),
+    const QuickActionModel(
+      title: 'Sales History',
+      icon: Icons.trending_up_outlined,
+      backgroundColor: Colors.white,
+      iconColor: Color(0xFF1E293B),
+      textColor: Color(0xFF334155),
+      isPrimary: false,
+      route: '/sales-history',
+    ),
   ].obs;
 }

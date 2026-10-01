@@ -624,7 +624,7 @@ Widget quickaction({
   );
 }
 
-// CUSTOM PAINTERS
+
 
 /// Decorative subtle wave curve for the Sales Hero Card
 class _SalesWavePainter extends CustomPainter {

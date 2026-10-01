@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sellora/binding/addExpense.binding.dart';
 import 'package:sellora/binding/addProduct.binding.dart';
 import 'package:sellora/binding/homePage.binding.dart';
+import 'package:sellora/binding/salesHistory.binding.dart';
 import 'package:sellora/binding/setup1.binding.dart';
 import 'package:sellora/binding/setup2.binding.dart';
 import 'package:sellora/binding/signin.binding.dart';
@@ -9,6 +10,7 @@ import 'package:sellora/binding/signup.binding.dart';
 import 'package:sellora/pages/addExpense.dart';
 import 'package:sellora/pages/addProduct.dart';
 import 'package:sellora/pages/homePage.dart';
+import 'package:sellora/pages/salesHistory.dart';
 import 'package:sellora/pages/setup1.dart';
 import 'package:sellora/pages/setup2.dart';
 import 'package:sellora/pages/signin.dart';
@@ -85,6 +87,15 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) {
         Addexpensebinding().dependencies();
         return Addexpense();
+      },
+    ),
+    //sales history
+        GoRoute(
+      path: '/sales-history',
+      name: 'salesHistory',
+      builder: (context, state) {
+        SalesHistoryBinding().dependencies();
+        return Saleshistory();
       },
     ),
        
