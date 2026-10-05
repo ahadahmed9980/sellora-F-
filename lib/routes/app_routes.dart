@@ -98,6 +98,7 @@ final GoRouter appRouter = GoRouter(
         return Saleshistory();
       },
     ),
+    // product  catelog
        
   ],
 );

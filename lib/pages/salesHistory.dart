@@ -501,7 +501,7 @@ class Saleshistory extends StatelessWidget {
 
             return SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
+             physics: const ClampingScrollPhysics(),
               child: Row(
                 children: methods.map((method) {
                   final isSelected = current == method;
@@ -586,7 +586,7 @@ class Saleshistory extends StatelessWidget {
 
           ListView.separated(
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
+               physics: const ClampingScrollPhysics(),
             itemCount: sales.length,
             separatorBuilder: (context, index) =>
                 const SizedBox(height: AppTheme.spacingMD),
