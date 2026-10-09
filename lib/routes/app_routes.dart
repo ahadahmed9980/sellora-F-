@@ -98,7 +98,15 @@ final GoRouter appRouter = GoRouter(
         return Saleshistory();
       },
     ),
-    // product  catelog
+    // product  lists
+       GoRoute(
+      path: '/sales-history',
+      name: 'salesHistory',
+      builder: (context, state) {
+        SalesHistoryBinding().dependencies();
+        return Saleshistory();
+      },
+    ),
        
   ],
 );
