@@ -100,8 +100,8 @@ final GoRouter appRouter = GoRouter(
     ),
     // product  lists
        GoRoute(
-      path: '/sales-history',
-      name: 'salesHistory',
+      path: '/product-list',
+      name: 'ProductList',
       builder: (context, state) {
         SalesHistoryBinding().dependencies();
         return Saleshistory();

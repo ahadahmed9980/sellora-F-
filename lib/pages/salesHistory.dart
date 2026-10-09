@@ -4,11 +4,13 @@ import 'package:sellora/controller/salesHistory.controller.dart';
 import 'package:sellora/models/salesHistoryModels.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
 import 'package:sellora/widgets/appbar.dart';
+import 'package:sellora/widgets/searchBar.dart';
 
 class Saleshistory extends StatelessWidget {
   Saleshistory({super.key});
 
-  final SalesHistoryController controller = Get.isRegistered<SalesHistoryController>()
+  final SalesHistoryController controller =
+      Get.isRegistered<SalesHistoryController>()
       ? Get.find<SalesHistoryController>()
       : Get.put(SalesHistoryController());
 
@@ -429,62 +431,65 @@ class Saleshistory extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Search Input Field
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-            decoration: BoxDecoration(
-              color: const Color(0xFFF8FAFC),
-              borderRadius: BorderRadius.circular(AppDimensions.radiusMD),
-              border: Border.all(
-                color: AppColors.border,
-                width: AppDimensions.borderWidth,
-              ),
-            ),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.search_rounded,
-                  color: AppColors.textMuted,
-                  size: 20,
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: TextField(
-                    controller: controller.searchController,
-                    style: AppTypography.bodyMedium.copyWith(
-                      color: AppColors.textPrimary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    decoration: InputDecoration(
-                      hintText: "Search receipt #, customer or item...",
-                      hintStyle: AppTypography.bodySmall.copyWith(
-                        color: AppColors.textMuted,
-                        fontSize: 12.5,
-                      ),
-                      border: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      isDense: true,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 10),
-                    ),
-                  ),
-                ),
-                Obx(() {
-                  if (controller.searchQuery.value.isNotEmpty) {
-                    return GestureDetector(
-                      onTap: controller.clearSearch,
-                      child: const Icon(
-                        Icons.cancel_outlined,
-                        color: AppColors.textMuted,
-                        size: 18,
-                      ),
-                    );
-                  }
-                  return const SizedBox.shrink();
-                }),
-              ],
-            ),
+          CustomSearchbar(
+            hinttext: "Search receipt #, customer or item...",
+            controller: controller.searchController,
           ),
-          const SizedBox(height: AppTheme.spacingMD),
+          // Container(
+          //   padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+          //   decoration: BoxDecoration(
+          //     color: const Color(0xFFF8FAFC),
+          //     borderRadius: BorderRadius.circular(AppDimensions.radiusMD),
+          //     border: Border.all(
+          //       color: AppColors.border,
+          //       width: AppDimensions.borderWidth,
+          //     ),
+          //   ),
+          //   child: Row(
+          //     children: [
+          //       const Icon(
+          //         Icons.search_rounded,
+          //         color: AppColors.textMuted,
+          //         size: 20,
+          //       ),
+          //       const SizedBox(width: 8),
+          //       Expanded(
+          //         child: TextField(
+          //           controller: controller.searchController,
+          //           style: AppTypography.bodyMedium.copyWith(
+          //             color: AppColors.textPrimary,
+          //             fontWeight: FontWeight.w600,
+          //           ),
+          //           decoration: InputDecoration(
+          //             hintText: "Search receipt #, customer or item...",
+          //             hintStyle: AppTypography.bodySmall.copyWith(
+          //               color: AppColors.textMuted,
+          //               fontSize: 12.5,
+          //             ),
+          //             border: InputBorder.none,
+          //             enabledBorder: InputBorder.none,
+          //             focusedBorder: InputBorder.none,
+          //             isDense: true,
+          //             contentPadding: const EdgeInsets.symmetric(vertical: 10),
+          //           ),
+          //         ),
+          //       ),
+          //       Obx(() {
+          //         if (controller.searchQuery.value.isNotEmpty) {
+          //           return GestureDetector(
+          //             onTap: controller.clearSearch,
+          //             child: const Icon(
+          //               Icons.cancel_outlined,
+          //               color: AppColors.textMuted,
+          //               size: 18,
+          //             ),
+          //           );
+          //         }
+          //         return const SizedBox.shrink();
+          //       }),
+          //     ],
+          //   ),
+          // ),
 
           // Payment Filter Pills: All, Cash, Credit, Online/Card
           Text(
@@ -501,7 +506,7 @@ class Saleshistory extends StatelessWidget {
 
             return SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-             physics: const ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               child: Row(
                 children: methods.map((method) {
                   final isSelected = current == method;
@@ -586,7 +591,7 @@ class Saleshistory extends StatelessWidget {
 
           ListView.separated(
             shrinkWrap: true,
-               physics: const ClampingScrollPhysics(),
+            physics: const ClampingScrollPhysics(),
             itemCount: sales.length,
             separatorBuilder: (context, index) =>
                 const SizedBox(height: AppTheme.spacingMD),
@@ -788,7 +793,9 @@ class Saleshistory extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    sale.items.map((i) => "${i.title} (x${i.quantity})").join(", "),
+                    sale.items
+                        .map((i) => "${i.title} (x${i.quantity})")
+                        .join(", "),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: AppTypography.bodySmall.copyWith(
@@ -864,9 +871,7 @@ class Saleshistory extends StatelessWidget {
           Text(
             "No transactions match the selected filters.",
             textAlign: TextAlign.center,
-            style: AppTypography.bodySmall.copyWith(
-              color: AppColors.textMuted,
-            ),
+            style: AppTypography.bodySmall.copyWith(color: AppColors.textMuted),
           ),
           const SizedBox(height: 16),
           GestureDetector(
@@ -926,7 +931,10 @@ class Saleshistory extends StatelessWidget {
 
               // Modal Header Row: Close button, Boutique/Store pill, Wifi/Register Icon
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -955,10 +963,7 @@ class Saleshistory extends StatelessWidget {
                         borderRadius: BorderRadius.circular(
                           AppDimensions.radiusPill,
                         ),
-                        border: Border.all(
-                          color: AppColors.border,
-                          width: 1,
-                        ),
+                        border: Border.all(color: AppColors.border, width: 1),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -1016,7 +1021,8 @@ class Saleshistory extends StatelessWidget {
                           color: const Color(0xFFDCFCE7),
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFF10B981).withValues(alpha: 0.25),
+                              color: const Color(0xFF10B981)
+                                  .withValues(alpha: 0.25),
                               blurRadius: 30,
                               spreadRadius: 8,
                             ),
@@ -1053,7 +1059,8 @@ class Saleshistory extends StatelessWidget {
 
                       // Receipt Pill `#INV-10293` with copy icon
                       GestureDetector(
-                        onTap: () => controller.copyReceiptNumber(sale.receiptNumber),
+                        onTap: () =>
+                            controller.copyReceiptNumber(sale.receiptNumber),
                         child: Container(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 14,
@@ -1154,17 +1161,17 @@ class Saleshistory extends StatelessWidget {
                                             item.title,
                                             style: AppTypography.bodySmall
                                                 .copyWith(
-                                              fontWeight: FontWeight.w700,
-                                              color: AppColors.textPrimary,
-                                            ),
+                                                  fontWeight: FontWeight.w700,
+                                                  color: AppColors.textPrimary,
+                                                ),
                                           ),
                                           Text(
                                             "@ Rs ${item.unitPrice.toStringAsFixed(0)} each",
                                             style: AppTypography.bodySmall
                                                 .copyWith(
-                                              fontSize: 10.5,
-                                              color: AppColors.textMuted,
-                                            ),
+                                                  fontSize: 10.5,
+                                                  color: AppColors.textMuted,
+                                                ),
                                           ),
                                         ],
                                       ),
@@ -1202,8 +1209,8 @@ class Saleshistory extends StatelessWidget {
                                     color: sale.paymentMethod == 'Cash'
                                         ? const Color(0xFFECFDF5)
                                         : sale.paymentMethod == 'Credit'
-                                            ? const Color(0xFFFFFBEB)
-                                            : const Color(0xFFEFF6FF),
+                                        ? const Color(0xFFFFFBEB)
+                                        : const Color(0xFFEFF6FF),
                                     borderRadius: BorderRadius.circular(
                                       AppDimensions.radiusPill,
                                     ),
@@ -1216,8 +1223,8 @@ class Saleshistory extends StatelessWidget {
                                       color: sale.paymentMethod == 'Cash'
                                           ? const Color(0xFF10B981)
                                           : sale.paymentMethod == 'Credit'
-                                              ? const Color(0xFFF59E0B)
-                                              : const Color(0xFF3B82F6),
+                                          ? const Color(0xFFF59E0B)
+                                          : const Color(0xFF3B82F6),
                                     ),
                                   ),
                                 ),
@@ -1312,7 +1319,8 @@ class Saleshistory extends StatelessWidget {
                             ),
                             boxShadow: [
                               BoxShadow(
-                                color: const Color(0xFFF59E0B).withValues(alpha: 0.35),
+                                color: const Color(0xFFF59E0B)
+                                    .withValues(alpha: 0.35),
                                 blurRadius: 16,
                                 offset: const Offset(0, 6),
                               ),
