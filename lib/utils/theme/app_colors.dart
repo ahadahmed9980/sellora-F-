@@ -60,6 +60,11 @@ class AppColors {
   static const Color cardRedBorder = Color(0xFFFEE2E2);
   static const Color cardRedIconBg = Color(0xFFFEE2E2);
   static const Color cardRedIcon = Color(0xFFF43F5E);
+  
+  static const Color cardOrangeBg = Color(0xFFFFFBEB);     // Extremely soft warm background
+static const Color cardOrangeBorder = Color(0xFFFEF3C7);// Aapka light orange color
+static const Color cardOrangeIconBg = Color(0xFFFACD81); // Icon circular background
+static const Color cardOrangeIcon = Color(0xFFDB7D12);
 
   // ============================================================
   // GRADIENTS

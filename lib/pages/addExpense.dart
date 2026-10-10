@@ -310,7 +310,7 @@ class Addexpense extends StatelessWidget {
                 crossAxisCount: 4,
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
-                childAspectRatio: 0.92,
+                childAspectRatio: 0.82,
               ),
               itemBuilder: (context, index) {
                 final item = controller.categories[index];

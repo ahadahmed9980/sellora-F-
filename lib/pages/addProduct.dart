@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sellora/controller/addProduct.controller.dart';
 import 'package:sellora/utils/scanner_screen.dart';
@@ -369,7 +368,7 @@ class Addproduct extends StatelessWidget {
           ),
           const SizedBox(height: AppTheme.spacingMD),
 
-          // Category * (using reusable DynamicCategorySelector)
+          // Category *
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -380,16 +379,7 @@ class Addproduct extends StatelessWidget {
                   color: AppColors.textPrimary,
                 ),
               ),
-              GestureDetector(
-                onTap: () => context.push('/add-category'),
-                child: Text(
-                  "+ New",
-                  style: AppTypography.bodySmall.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.primary,
-                  ),
-                ),
-              ),
+          
             ],
           ),
           const SizedBox(height: AppTheme.spacingSM),
@@ -400,6 +390,7 @@ class Addproduct extends StatelessWidget {
               onCategorySelected: controller.updateCategory,
             ),
           ),
+
           const SizedBox(height: AppTheme.spacingMD),
 
           // SKU / Item Code

@@ -8,6 +8,7 @@ import 'package:sellora/controller/homePage.controller.dart';
 import 'package:sellora/utils/responsive.dart';
 import 'package:sellora/utils/theme/app_colors.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
+import 'package:sellora/widgets/buildMetricCard.dart';
 
 class Homepage extends StatelessWidget {
   Homepage({super.key});
@@ -40,40 +41,39 @@ class Homepage extends StatelessWidget {
             Text("Quick Actions", style: AppTheme.h1),
             const SizedBox(height: AppTheme.spacingLG),
             // Quick actions row
-       Obx(
-  () => GridView.builder(
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: Responsive.isMobileScreen(context) ? 4 : 5,
-      crossAxisSpacing: 12,
-      mainAxisSpacing: 16,
-      childAspectRatio: 0.8,
-    ),
-    itemCount: homeController.quickActions.length,
-    itemBuilder: (context, index) {
-      final action = homeController.quickActions[index];
+            Obx(
+              () => GridView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: Responsive.isMobileScreen(context) ? 4 : 5,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: 0.8,
+                ),
+                itemCount: homeController.quickActions.length,
+                itemBuilder: (context, index) {
+                  final action = homeController.quickActions[index];
 
-      return quickaction(
-        title: action.title,
-        icon: action.icon,
-        bgColor: action.backgroundColor,
-        iconColor: action.iconColor,
-        textColor: action.textColor,
-        isPrimary: action.isPrimary,
-        route: action.route,
-        context: context,
-      );
-    },
-  ),
-)   ],
+                  return quickaction(
+                    title: action.title,
+                    icon: action.icon,
+                    bgColor: action.backgroundColor,
+                    iconColor: action.iconColor,
+                    textColor: action.textColor,
+                    isPrimary: action.isPrimary,
+                    route: action.route,
+                    context: context,
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
-
-
 
   Widget _buildHeroSalesCard() {
     return Container(
@@ -212,7 +212,7 @@ class Homepage extends StatelessWidget {
       children: [
         // 1. Cash Collected
         Expanded(
-          child: _buildMetricCard(
+          child: buildMetricCard(
             title: "Cash Collected",
             amount: "Rs 32,800",
             icon: Icons.payments_rounded,
@@ -227,7 +227,7 @@ class Homepage extends StatelessWidget {
 
         // 2. Credit (Udhaar)
         Expanded(
-          child: _buildMetricCard(
+          child: buildMetricCard(
             title: "Credit",
             amount: "Rs 12,700",
             icon: Icons.credit_card_rounded,
@@ -242,7 +242,7 @@ class Homepage extends StatelessWidget {
 
         // 3. Expenses
         Expanded(
-          child: _buildMetricCard(
+          child: buildMetricCard(
             title: "Expenses",
             amount: "Rs 2,000",
             icon: Icons.receipt_long_rounded,
@@ -256,84 +256,6 @@ class Homepage extends StatelessWidget {
       ],
     );
   }
-
-  //widget card
-  Widget _buildMetricCard({
-    required String title,
-    required String amount,
-    required IconData icon,
-    required Color iconBgColor,
-    required Color iconColor,
-    required Color cardBgColor,
-    required Color borderColor,
-    required Color dotColor,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-      decoration: BoxDecoration(
-        color: cardBgColor,
-        borderRadius: BorderRadius.circular(AppDimensions.radiusLG),
-        border: Border.all(color: borderColor, width: 1.0),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Top Icon & Dot row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                height: 34,
-                width: 34,
-                decoration: BoxDecoration(
-                  color: iconBgColor,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(icon, color: iconColor, size: 18),
-              ),
-              Container(
-                width: 7,
-                height: 7,
-                decoration: BoxDecoration(
-                  color: dotColor,
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-
-          // Title
-          Text(
-            title,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: AppTheme.badge.copyWith(
-              fontWeight: FontWeight.w500,
-              color: AppColors.textSecondary,
-            ),
-          ),
-          const SizedBox(height: 4),
-
-          // Amount
-          Text(
-            amount,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.sora(
-              fontSize: 15,
-              fontWeight: FontWeight.w800,
-              letterSpacing: -0.3,
-              color: AppColors.textPrimary,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // NET PROFIT CARD WITH SPARKLINE
 
   Widget _buildNetProfitCard() {
     return Container(
@@ -623,8 +545,6 @@ Widget quickaction({
     ),
   );
 }
-
-
 
 /// Decorative subtle wave curve for the Sales Hero Card
 class _SalesWavePainter extends CustomPainter {

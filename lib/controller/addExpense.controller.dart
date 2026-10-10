@@ -15,7 +15,7 @@ class Addexpensecontroller extends GetxController {
   );
 
   // Expense Amount State
-  final RxDouble expenseAmount = 8500.0.obs;
+  final RxDouble expenseAmount = 500.0.obs;
 
   void updateAmount(String value) {
     final cleanText = value.replaceAll(',', '').trim();
