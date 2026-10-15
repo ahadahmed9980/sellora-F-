@@ -72,14 +72,112 @@ class ProductList extends StatelessWidget {
               buildMetricCardsRow(),
               const SizedBox(height: AppTheme.spacingLG),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
+
                 children: [
-                  Text("Active Product Feed",style: AppTheme.bodyLarge,),
+                  Text("Active Product Feed", style: AppTheme.bodyLarge),
+                  Spacer(),
                   Text(
                     "Sorted by Stock",
-                    style: TextStyle(color: AppColors.primary),
+                    style: AppTheme.bodyMedium.copyWith(
+                      color: AppColors.primary,
+                    ),
                   ),
                 ],
+              ),
+              // product container
+              const SizedBox(height: AppTheme.spacingLG),
+              Container(
+                height: 100,
+                width: double.infinity,
+                padding: AppTheme.cardPadding,
+                decoration: BoxDecoration(
+                  color: AppColors.cardSurface,
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusXL),
+                  border: Border.all(
+                    color: AppColors.border,
+                    width: AppDimensions.borderWidth,
+                  ),
+                  boxShadow: AppTheme.cardShadow,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        alignment: Alignment.center,
+
+                        decoration: BoxDecoration(
+                          color: AppColors.cardRedBg,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: AppColors.cardRedBorder,
+                            width: 1.0,
+                          ),
+                        ),
+
+                        child: Icon(
+                          Icons.cookie_outlined,
+                          color: AppColors.cardRedIcon,
+                          size: 35,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Expanded(
+                      flex: 4,
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Coca Cola 1.5L",
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTheme.h2.copyWith(
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                              Text(
+                                "RS 220",
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTheme.h2.copyWith(
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 2),
+                      
+                          // category and sku
+                          Row(
+                            children: [
+                              Text(
+                                "Beverages",
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTheme.bodySmall.copyWith(
+                                  color: AppColors.textSecondary,
+                                ),
+                              ),
+                              SizedBox(width: 13),
+                              Text(
+                                "SKU - 2009",
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTheme.bodySmall.copyWith(
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                            ],
+                          ),
+                           // sttock left container 
+                           Container()
+
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
