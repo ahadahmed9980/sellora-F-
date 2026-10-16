@@ -53,7 +53,7 @@ Widget buildMetricCard({
           Text(
             title,
             maxLines: 1,
-            overflow: TextOverflow.ellipsis,
+          
             style: AppTheme.badge.copyWith(
               fontWeight: FontWeight.w500,
               color: AppColors.textSecondary,

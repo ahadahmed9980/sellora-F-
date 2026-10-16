@@ -87,98 +87,6 @@ class ProductList extends StatelessWidget {
               ),
               // product container
               const SizedBox(height: AppTheme.spacingLG),
-              Container(
-                height: 100,
-                width: double.infinity,
-                padding: AppTheme.cardPadding,
-                decoration: BoxDecoration(
-                  color: AppColors.cardSurface,
-                  borderRadius: BorderRadius.circular(AppDimensions.radiusXL),
-                  border: Border.all(
-                    color: AppColors.border,
-                    width: AppDimensions.borderWidth,
-                  ),
-                  boxShadow: AppTheme.cardShadow,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        alignment: Alignment.center,
-
-                        decoration: BoxDecoration(
-                          color: AppColors.cardRedBg,
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            color: AppColors.cardRedBorder,
-                            width: 1.0,
-                          ),
-                        ),
-
-                        child: Icon(
-                          Icons.cookie_outlined,
-                          color: AppColors.cardRedIcon,
-                          size: 35,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Coca Cola 1.5L",
-                                overflow: TextOverflow.ellipsis,
-                                style: AppTheme.h2.copyWith(
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                              Text(
-                                "RS 220",
-                                overflow: TextOverflow.ellipsis,
-                                style: AppTheme.h2.copyWith(
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 2),
-                      
-                          // category and sku
-                          Row(
-                            children: [
-                              Text(
-                                "Beverages",
-                                overflow: TextOverflow.ellipsis,
-                                style: AppTheme.bodySmall.copyWith(
-                                  color: AppColors.textSecondary,
-                                ),
-                              ),
-                              SizedBox(width: 13),
-                              Text(
-                                "SKU - 2009",
-                                overflow: TextOverflow.ellipsis,
-                                style: AppTheme.bodySmall.copyWith(
-                                  fontWeight: FontWeight.w900,
-                                ),
-                              ),
-                            ],
-                          ),
-                           // sttock left container 
-                           Container()
-
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
             ],
           ),
         ),
@@ -300,4 +208,203 @@ class buildHorizontalList extends StatelessWidget {
       ],
     );
   }
+}
+
+Widget buildProductListContainer(
+  String category,
+  String sku,
+  String title,
+  double price,
+  IconData icon,
+  String stock,
+  String profit,
+  double percentage
+) {
+  return Container(
+    width: double.infinity,
+    padding: AppTheme.cardPadding,
+    decoration: BoxDecoration(
+      color: AppColors.cardSurface,
+      borderRadius: BorderRadius.circular(AppDimensions.radiusXL),
+      border: Border.all(
+        color: AppColors.border,
+        width: AppDimensions.borderWidth,
+      ),
+      boxShadow: AppTheme.cardShadow,
+    ),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          flex: 1,
+          child: AspectRatio(
+            aspectRatio: 1.0, // Responsive circle ratio barkarar rakhta hai
+            child: Container(
+              padding: const EdgeInsets.all(
+                12,
+              ), // Padding se circle responsive bara rehta hai
+              decoration: BoxDecoration(
+                color: AppColors.cardRedBg,
+                shape: BoxShape.circle,
+                border: Border.all(color: AppColors.cardRedBorder, width: 1.0),
+              ),
+              child: const FittedBox(
+                // FittedBox icon ko container ke mutabiq scale karta hai
+                fit: BoxFit.contain,
+                child: Icon(
+                  Icons.cookie_outlined,
+                  color: AppColors.cardRedIcon,
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(width: 5),
+        Expanded(
+          flex: 4,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Coca Cola 1.5L",
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTheme.h2.copyWith(fontWeight: FontWeight.w900),
+                  ),
+                  Text(
+                    "RS 220",
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTheme.h2.copyWith(fontWeight: FontWeight.w900),
+                  ),
+                ],
+              ),
+              SizedBox(height: 2),
+
+              // category and sku
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Beverages",
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTheme.bodySmall.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
+                  ),
+                  SizedBox(width: 13),
+                  Text(
+                    "SKU - 2009",
+                    overflow: TextOverflow.ellipsis,
+                    style: AppTheme.bodySmall.copyWith(
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 15),
+              // stock left container
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                // height: 20,
+                // width: 50,
+                decoration: BoxDecoration(
+                  color: AppColors.cardOrangeBg,
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusLG),
+                  border: Border.all(
+                    color: AppColors.cardOrangeBorder,
+                    width: 1.0,
+                  ),
+                ),
+                //dot and text
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 7,
+                      height: 7,
+                      decoration: BoxDecoration(
+                        color: Colors.orange,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      "24 left",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTheme.bodyMedium.copyWith(
+                        color: Colors.deepOrange,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    SizedBox(width: 4),
+                    Container(
+                      width: 4,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: Colors.deepOrange,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      "Low Stock",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTheme.bodyMedium.copyWith(
+                        color: Colors.deepOrange,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+
+                decoration: BoxDecoration(
+                  color: AppColors.cardGreenBg,
+                  borderRadius: BorderRadius.circular(AppDimensions.radiusLG),
+                  border: Border.all(
+                    color: AppColors.cardGreenBorder,
+                    width: 1.0,
+                  ),
+                ),
+                //dot and text
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 7,
+                      height: 7,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      "2Profit Rs 40/unit (18.2%)",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTheme.bodyMedium.copyWith(
+                        color: Colors.green,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    ),
+  );
 }
