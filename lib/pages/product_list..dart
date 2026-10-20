@@ -87,6 +87,30 @@ class ProductList extends StatelessWidget {
               ),
               // product container
               const SizedBox(height: AppTheme.spacingLG),
+              // product list builder. seperated
+              Obx(() {
+                return ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+
+                  scrollDirection: Axis.vertical,
+                  separatorBuilder: (_, __) => const SizedBox(height: 8),
+                  itemCount: controller.productsList.length,
+                  itemBuilder: (context, index) {
+                    final productDetail = controller.productsList[index];
+                    return buildProductListContainer(
+                      productDetail.category,
+                      productDetail.sku,
+                      productDetail.title,
+                      productDetail.price,
+                      productDetail.icon,
+                      productDetail.stockText,
+                      productDetail.profitText,
+                      productDetail.isLowStock,
+                    );
+                  },
+                );
+              }),
             ],
           ),
         ),
@@ -214,12 +238,48 @@ Widget buildProductListContainer(
   String category,
   String sku,
   String title,
-  double price,
+  String price,
   IconData icon,
   String stock,
   String profit,
-  double percentage
+
+  bool isLowStock,
 ) {
+  final Color iconColor = switch (category.toLowerCase()) {
+    'beverages' => AppColors.cardRedIcon, // Red background
+    'snacks' => AppColors.cardOrangeIcon, // Orange/Yellow background
+    'groceries' || 'grocery' => AppColors.cardGreenIcon, // Purple background
+    _ => Colors.grey.shade100, // Default color
+  };
+  final Color iconContainerColor = switch (category.toLowerCase()) {
+    'beverages' => AppColors.cardRedBg, // Red background
+    'snacks' => AppColors.cardOrangeBg, // Orange/Yellow background
+    'groceries' || 'grocery' => AppColors.cardGreenBg, // Purple background
+    _ => Colors.grey.shade100, // Default color
+  };
+  final Color iconContainerBorderColor = switch (category.toLowerCase()) {
+    'beverages' => AppColors.cardRedBorder, // Red background
+    'snacks' => AppColors.cardOrangeBorder, // Orange/Yellow background
+    'groceries' || 'grocery' => AppColors.cardGreenBorder, // Purple background
+    _ => Colors.grey.shade100, // Default color
+  };
+  final Color lowStockbackground = switch (isLowStock) {
+    true => AppColors.cardOrangeBg,
+    false => AppColors.cardGreenBg,
+  };
+  final Color textcolor = switch (isLowStock) {
+    true => Colors.deepOrange,
+    false => Colors.green,
+  };
+  final Color dotcolor = switch (isLowStock) {
+    true => Colors.orange,
+    false => Colors.green,
+  };
+  final Color bordercolor = switch (isLowStock) {
+    true => AppColors.cardOrangeBorder,
+    false => AppColors.cardGreenBg,
+  };
+
   return Container(
     width: double.infinity,
     padding: AppTheme.cardPadding,
@@ -244,17 +304,14 @@ Widget buildProductListContainer(
                 12,
               ), // Padding se circle responsive bara rehta hai
               decoration: BoxDecoration(
-                color: AppColors.cardRedBg,
+                color: iconContainerColor,
                 shape: BoxShape.circle,
-                border: Border.all(color: AppColors.cardRedBorder, width: 1.0),
+                border: Border.all(color: iconContainerBorderColor, width: 1.0),
               ),
-              child: const FittedBox(
+              child: FittedBox(
                 // FittedBox icon ko container ke mutabiq scale karta hai
                 fit: BoxFit.contain,
-                child: Icon(
-                  Icons.cookie_outlined,
-                  color: AppColors.cardRedIcon,
-                ),
+                child: Icon(icon, color: iconColor),
               ),
             ),
           ),
@@ -269,15 +326,23 @@ Widget buildProductListContainer(
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    "Coca Cola 1.5L",
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTheme.h2.copyWith(fontWeight: FontWeight.w900),
+                  //title
+                  Expanded(
+                    child: Text(
+                      title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTheme.h2.copyWith(fontWeight: FontWeight.w900),
+                    ),
                   ),
-                  Text(
-                    "RS 220",
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTheme.h2.copyWith(fontWeight: FontWeight.w900),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      "RS ${price}",
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: AppTheme.h2.copyWith(fontWeight: FontWeight.w900),
+                    ),
                   ),
                 ],
               ),
@@ -289,7 +354,7 @@ Widget buildProductListContainer(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Beverages",
+                    category.toUpperCase(),
                     overflow: TextOverflow.ellipsis,
                     style: AppTheme.bodySmall.copyWith(
                       color: AppColors.textSecondary,
@@ -297,7 +362,7 @@ Widget buildProductListContainer(
                   ),
                   SizedBox(width: 13),
                   Text(
-                    "SKU - 2009",
+                    sku,
                     overflow: TextOverflow.ellipsis,
                     style: AppTheme.bodySmall.copyWith(
                       fontWeight: FontWeight.w900,
@@ -312,12 +377,9 @@ Widget buildProductListContainer(
                 // height: 20,
                 // width: 50,
                 decoration: BoxDecoration(
-                  color: AppColors.cardOrangeBg,
+                  color: lowStockbackground,
                   borderRadius: BorderRadius.circular(AppDimensions.radiusLG),
-                  border: Border.all(
-                    color: AppColors.cardOrangeBorder,
-                    width: 1.0,
-                  ),
+                  border: Border.all(color: bordercolor, width: 1.0),
                 ),
                 //dot and text
                 child: Row(
@@ -327,36 +389,39 @@ Widget buildProductListContainer(
                       width: 7,
                       height: 7,
                       decoration: BoxDecoration(
-                        color: Colors.orange,
+                        color: dotcolor,
                         shape: BoxShape.circle,
                       ),
                     ),
                     SizedBox(width: 4),
                     Text(
-                      "24 left",
+                      stock,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTheme.bodyMedium.copyWith(
-                        color: Colors.deepOrange,
+                        color: textcolor,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
                     SizedBox(width: 4),
-                    Container(
-                      width: 4,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: Colors.deepOrange,
-                        shape: BoxShape.circle,
-                      ),
-                    ),
+                    isLowStock
+                        ? Container(
+                            width: 4,
+                            height: 4,
+                            decoration: BoxDecoration(
+                              color: Colors.deepOrange,
+                              shape: BoxShape.circle,
+                            ),
+                          )
+                        : SizedBox.shrink(),
+
                     SizedBox(width: 4),
                     Text(
-                      "Low Stock",
+                      isLowStock ? "Low Stock" : '',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTheme.bodyMedium.copyWith(
-                        color: Colors.deepOrange,
+                        color: textcolor,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -390,7 +455,7 @@ Widget buildProductListContainer(
                     ),
                     SizedBox(width: 4),
                     Text(
-                      "2Profit Rs 40/unit (18.2%)",
+                      profit,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: AppTheme.bodyMedium.copyWith(
