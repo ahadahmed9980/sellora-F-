@@ -23,7 +23,7 @@ class DynamicCategory extends StatelessWidget {
     return SizedBox(
       height: height,
       child: ListView.separated(
-        physics: const BouncingScrollPhysics(),
+        physics: const  ClampingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         separatorBuilder: (_, __) => const SizedBox(width: 8),

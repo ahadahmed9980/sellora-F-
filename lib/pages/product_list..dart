@@ -6,6 +6,7 @@ import 'package:sellora/controller/product_list.controller.dart';
 import 'package:sellora/utils/theme/app_theme.dart';
 import 'package:sellora/widgets/appbar.dart';
 import 'package:sellora/widgets/buildMetricCard.dart';
+import 'package:sellora/widgets/horizontalList_cate.dart';
 import 'package:sellora/widgets/searchBar.dart';
 
 class ProductList extends StatelessWidget {
@@ -51,7 +52,7 @@ class ProductList extends StatelessWidget {
                         onTap: () {
                           controller.selectedIndex.value = index;
                         },
-                        child: buildHorizontalList(
+                        child: BuildHorizontalList(
                           title: controller.setupCategories[index].title,
                           count: controller.setupCategories[index].count,
                           isSelected: isSelected,
@@ -170,70 +171,6 @@ Widget buildMetricCardsRow() {
   );
 }
 
-class buildHorizontalList extends StatelessWidget {
-  String title;
-  bool isSelected;
-  int count;
-  buildHorizontalList({
-    super.key,
-    required this.title,
-    required this.isSelected,
-    required this.count,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          height: 44.0,
-          alignment: Alignment.center,
-
-          //padding
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          decoration: BoxDecoration(
-            color: isSelected ? AppColors.primary : AppColors.cardSurface,
-            borderRadius: BorderRadius.circular(AppDimensions.radiusPill),
-            border: Border.all(
-              color: isSelected ? AppColors.primary : AppColors.border,
-              width: AppDimensions.borderWidth,
-            ),
-            boxShadow: isSelected
-                ? [
-                    BoxShadow(
-                      color: AppColors.primary.withValues(alpha: 0.25),
-                      blurRadius: 8,
-                      offset: const Offset(0, 2),
-                    ),
-                  ]
-                : null,
-          ),
-          child: Row(
-            children: [
-              Text(
-                title,
-                style: AppTypography.bodyMedium.copyWith(
-                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                  color: isSelected ? Colors.white : AppColors.textPrimary,
-                ),
-              ),
-              SizedBox(width: 2),
-              Text(
-                "(${count.toString()})",
-                style: AppTypography.bodyMedium.copyWith(
-                  fontWeight: isSelected ? FontWeight.w600 : FontWeight.w500,
-                  color: isSelected ? Colors.white : AppColors.textPrimary,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 Widget buildProductListContainer(
   String category,
   String sku,
@@ -338,7 +275,7 @@ Widget buildProductListContainer(
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      "RS ${price}",
+                      "RS $price",
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: AppTheme.h2.copyWith(fontWeight: FontWeight.w900),
